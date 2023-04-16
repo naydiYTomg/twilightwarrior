@@ -47,3 +47,47 @@ body {
     width: 125px;
     height: 125px;
 }
+.atkb {
+    position: absolute;
+    width: 125px;
+    border-radius: 5px;
+    top: 25px;
+    left: 10px;
+}
+.defb {
+    position: absolute;
+    width: 125px;
+    border-radius: 5px;
+    top: 25px;
+    left: 170px;
+}
+.magb {
+    position: absolute;
+    width: 125px;
+    border-radius: 5px;
+    top: 25px;
+    right: 170px;
+}
+.invb {
+    position: absolute;
+    width: 125px;
+    border-radius: 5px;
+    top: 25px;
+    right: 10px;
+}
+.atkb:hover {
+    scale: 1.05;
+    rotate: 2deg;
+}
+.defb:hover {
+    scale: 1.05;
+    rotate: -2deg;
+}
+.magb:hover {
+    scale: 1.05;
+    rotate: 2deg;
+}
+.invb:hover {
+    scale: 1.05;
+    rotate: -2deg;
+}
