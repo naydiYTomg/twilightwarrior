@@ -1,8 +1,157 @@
+@keyframes butanim {
+    0% {
+        scale: 1.05;
+        rotate: 2deg;
+    }
+    25% {
+        scale: 1;
+        rotate: 0deg;
+    }
+    50% {
+        scale: 1.05;
+        rotate: -2deg;
+    }
+    75% {
+        scale: 1;
+        rotate: 0deg;
+    }
+    100% {
+        scale: 1.05;
+        rotate: 2deg;
+    }
+}
+@keyframes opc {
+    0% {
+        opacity: 60%;
+    }
+    25% {
+        opacity: 70%;
+    }
+    50% {
+        opacity: 80%;
+    }
+    75% {
+        opacity: 90%;
+    }
+    100% {
+        opacity: 100%;
+    }
+}
+@keyframes opcb {
+    0% {
+        opacity: 100%;
+    }
+    25% {
+        opacity: 90%;
+    }
+    50% {
+        opacity: 80%;
+    }
+    75% {
+        opacity: 70%;
+    }
+    100% {
+        opacity: 60%;
+    }
+}
+@keyframes opcb1 {
+    0% {
+        opacity: 100%;
+        scale: 1.05;
+    }
+    25% {
+        opacity: 95%;
+        scale: 1.04;
+    }
+    50% {
+        opacity: 92%;
+        scale: 1.03;
+    }
+    75% {
+        opacity: 90%;
+        scale: 1.02;
+    }
+    100% {
+        opacity: 85%;
+        scale: 1;
+    }
+}
+@keyframes opc1 {
+    0% {
+        opacity: 85%;
+        scale: 1.01;
+    }
+    25% {
+        opacity: 90%;
+        scale: 1.02;
+    }
+    50% {
+        opacity: 92%;
+        scale: 1.03;
+    }
+    75% {
+        opacity: 95%;
+        scale: 1.04;
+    }
+    100% {
+        opacity: 100%;
+        scale: 1.05;
+    }
+}
+@keyframes blToNorm {
+    0% {
+        opacity: 100%;
+    }
+    25% {
+        opacity: 75%;
+    }
+    50% {
+        opacity: 50%;
+    }
+    75% {
+        opacity: 25%;
+    }
+    100% {
+        opacity: 100%;
+    }
+}
 body {
     /* padding: 0; */
     /* margin: 0; */
     background: rgb(14,18,14);
     background: linear-gradient(90deg, rgba(14,18,14,1) 0%, rgba(2,77,35,1) 24%, rgba(15,60,34,1) 77%, rgba(0,0,0,1) 100%);
+}
+.blackScreen {
+    display: none;
+    z-index: 3;
+    position: absolute;
+    background-color: black;
+    width: 1920px;
+    height: 1080px;
+    animation: none;
+}
+.historyTeller {
+    position: absolute;
+    color: rgb(226, 202, 202);
+    font-size: 30px;
+    top: 250px;
+    left: 10px;
+}
+.nextbut {
+    width: 170px;
+    height: 70px;
+    position: absolute;
+    background-color: azure;
+    border-radius: 10px;
+    top: 370px;
+    left: 750px;
+    color: black;
+    font-size: 40px;
+    text-align: center;
+    padding-top: 15px;
+}
+.nextbut:hover {
+    scale: 1.05;
 }
 .for1 {
     /* padding: 0px; */
@@ -29,6 +178,7 @@ body {
     background: radial-gradient(circle, rgba(0,79,35,1) 0%, rgba(15,60,34,1) 32%, rgba(0,0,0,1) 100%);
 }
 .leftmenu {
+    animation: opcb ease-in-out 100ms forwards;
     top: 10px;
     position: absolute;
     width: 970px;
@@ -37,6 +187,9 @@ body {
     background-color: black;
     border-radius: 10px;
     opacity: 50%;
+}
+.leftmenu:hover {
+    animation: opc ease-in-out 100ms forwards;
 }
 .ggimg {
     top: -20px;
@@ -76,18 +229,140 @@ body {
     right: 10px;
 }
 .atkb:hover {
-    scale: 1.05;
-    rotate: 2deg;
+    animation: butanim 4s ease-in-out infinite;
 }
 .defb:hover {
-    scale: 1.05;
-    rotate: -2deg;
+    animation: butanim 4s ease-in-out infinite;
 }
 .magb:hover {
-    scale: 1.05;
-    rotate: 2deg;
+    animation: butanim 4s ease-in-out infinite;
 }
 .invb:hover {
-    scale: 1.05;
-    rotate: -2deg;
+    animation: butanim 4s ease-in-out infinite;
+}
+.zombie1 {
+    position: absolute;
+    left: 67%;
+    width: 320px;
+    /* border: 2px solid rgba(0, 100, 0, .1); */
+    border-radius: 10px;
+}
+.enemyname{
+    position: absolute;
+    color: white;
+    font-size: 90px;
+    top: -100px;
+    left: 10px;
+}
+.enemyhp{
+    color: white;
+    position: absolute;
+    font-size: 50px;
+    top: 80px;
+    left: 10px;
+}
+.enemydef{
+    position: absolute;
+    color: white;
+    font-size: 50px;
+    top: 150px;
+    left: 10px;
+}
+.resh1 {
+    animation: opcb1 ease-in-out 100ms forwards;
+    position: absolute;
+    width: 300px;
+    height: 400px;
+    background-color: wheat;
+    top: 200px;
+    left: 20px;
+    border-radius: 20px;
+    opacity: 95%;
+    
+}
+.resh1 p {
+    font-size: 20px;
+    color: black;
+    position: absolute;
+    top: 40%;
+    left: 34.5%;
+}
+.resh1:hover {
+    animation: opc1 ease-in-out 100ms forwards;
+}
+.killcross {
+    position: absolute;
+    width: 320px;
+    height: 390px;
+    left: 650px;
+    top: 60px;
+    display: none;
+}
+.resh2 {
+    animation: opcb1 ease-in-out 100ms forwards;
+    position: absolute;
+    width: 300px;
+    height: 400px;
+    background-color: wheat;
+    top: 200px;
+    left: 480px;
+    border-radius: 20px;
+    opacity: 95%;
+    
+}
+.resh2 p {
+    font-size: 20px;
+    color: black;
+    position: absolute;
+    top: 40%;
+    left: 15%;
+}
+.resh2:hover {
+    animation: opc1 ease-in-out 100ms forwards;
+}
+.playerstats {
+    position: absolute;
+    background-color: rgb(80, 80, 80);
+    width: 500px;
+    height: 495px;
+    top: 50%;
+    left: 14px;
+    border-radius: 10px;
+}
+.playername {
+    position: absolute;
+    font-size: 90px;
+    color: black;
+    top: -100px;
+    left: 20px;
+}
+.playerhp {
+    position: absolute;
+    font-size: 50px;
+    color: black;
+    top: 60px;
+    left: 20px;
+}
+.playerdef {
+    position: absolute;
+    font-size: 50px;
+    color: black;
+    top: 140px;
+    left: 20px;
+}
+.playerdamage {
+    position: absolute;
+    font-size: 50px;
+    color: black;
+    top: 220px;
+    left: 20px;
+}
+.end {
+    display: none;
+    z-index: 1;
+    position: absolute;
+    color: red;
+    font-size: 400px;
+    top: -150px;
+    left: 250px;
 }
