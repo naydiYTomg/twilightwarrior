@@ -247,6 +247,15 @@ body {
     /* border: 2px solid rgba(0, 100, 0, .1); */
     border-radius: 10px;
 }
+.wizard1 {
+    display: none;
+    position: absolute;
+    left: 68.7%;
+    width: 320px;
+    scale: 0.9;
+    /* border: 2px solid rgba(0, 100, 0, .1); */
+    border-radius: 10px;
+}
 .enemyname{
     position: absolute;
     color: white;
@@ -269,6 +278,7 @@ body {
     left: 10px;
 }
 .resh1 {
+    display: none;
     animation: opcb1 ease-in-out 100ms forwards;
     position: absolute;
     width: 300px;
@@ -281,11 +291,10 @@ body {
     
 }
 .resh1 p {
+    text-align: center;
     font-size: 20px;
     color: black;
-    position: absolute;
-    top: 40%;
-    left: 34.5%;
+    margin-top: 160px;
 }
 .resh1:hover {
     animation: opc1 ease-in-out 100ms forwards;
@@ -299,6 +308,7 @@ body {
     display: none;
 }
 .resh2 {
+    display: none;
     animation: opcb1 ease-in-out 100ms forwards;
     position: absolute;
     width: 300px;
@@ -313,11 +323,33 @@ body {
 .resh2 p {
     font-size: 20px;
     color: black;
+    text-align: center;
+    margin-top: 160px;
+}
+.resh2:hover {
+    animation: opc1 ease-in-out 100ms forwards;
+}
+.reshCenter {
+    display: none;
+    animation: opcb1 ease-in-out 100ms forwards;
+    position: absolute;
+    width: 300px;
+    height: 400px;
+    background-color: wheat;
+    top: 200px;
+    left: 240px;
+    border-radius: 20px;
+    opacity: 95%;
+    
+}
+.reshCenter p {
+    font-size: 20px;
+    color: black;
     position: absolute;
     top: 40%;
     left: 15%;
 }
-.resh2:hover {
+.reshCenter:hover {
     animation: opc1 ease-in-out 100ms forwards;
 }
 .playerstats {
