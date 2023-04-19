@@ -187,6 +187,14 @@ function endgame() {
     resh1.removeEventListener('click', changeEnStats);
     stop();
 }
+
+let enemy1 = new Enemy('Болотный Зомби',10, 2, 1);
+let hero = new Hero(10, 3, 1, 15, 10);
+changePlayerStats();
+
+
+//storytelling
+
 function nextToBattle1() {
     nextbut.style.display = 'none';
     ht.style.display = 'none';
@@ -223,6 +231,40 @@ function next7() {
     nextbut.addEventListener('click', next8);
     nextbut.removeEventListener('click', next7);
 }
+function wGnext1() {
+    ht.innerHTML = '- Да, вид у тебя не очень. Давай я тебя вылечу?';
+    resh1.style.display = 'none';
+    resh2.style.display = 'none';
+    resh1.removeEventListener('click', wGnext1);
+    resh2.removeEventListener('click', wEnext1);
+    nextbut.style.display = 'block';
+    nextbut.style.left = '470px';
+    nextbut.addEventListener('click', wGnext2);
+}
+function wGnext2() {
+    ht.innerHTML = 'Вы чувствуете прилив сил';
+    wiz.style.display = 'none';
+    enname.style.display = 'none';
+    nextbut.style.left = '750px';
+    hero.hp = 11;
+    changePlayerStats();
+    nextbut.removeEventListener('click', wGnext2);
+    nextbut.addEventListener('click', wGnext3);
+}
+function wGnext3() {
+    ht.innerHTML = 'Пройдёмся по лесу?';
+    wiz.style.display = 'block';
+    enname.style.display = 'block';
+    nextbut.style.left = '470px';
+    nextbut.style.display = 'none';
+    reshCenter.style.display = 'block';
+    reshCenterP.innerHTML = 'С радостью';
+    // reshCenter.addEventListener('click', wGnext4);
+    nextbut.removeEventListener('click', wGnext3);
+}
+function wEnext1() {
+
+}
 function next8() {
     ht.innerHTML = '- Здравстуй путник! Что привело тебя в земли гильдии <br> в столь ранний час?';
     wiz.style.display = 'block';
@@ -235,7 +277,8 @@ function next8() {
     resh1.style.display = 'block';
     resh2.style.display = 'block';
     nextbut.removeEventListener('click', next8);
-    // nextbut.addEventListener('ckick', next9);
+    resh1.addEventListener('click', wGnext1);
+    resh2.addEventListener('click', wEnext1);
 }
 function next3() {
     nextbut.style.display = 'block';
@@ -257,38 +300,4 @@ function next1() {
     nextbut.addEventListener('click', next2)
     localStorage.setItem('saveData', 1);
 }
-let enemy1 = new Enemy('Болотный Зомби',10, 2, 1);
-let hero = new Hero(10, 3, 1, 15, 10);
-changePlayerStats();
 nextbut.addEventListener('click', next1)
-// function tick() {
-//     if (turn == 0) {
-//         atkbut.addEventListener('click', hero.attack(enemy1))
-//         // defbut.addEventListener('click', hero.defence(enemy1))
-//         // techbut.addEventListener('click', hero.openTechMenu)
-//     } else if (turn == 1) {
-//         atkbut.removeEventListener('click', hero.attack(enemy1))
-//         // defbut.removeEventListener('click', hero.defence(enemy1))
-//         // techbut.removeEventListener('click', hero.openTechMenu)
-//         let c = getRandomArbitrary(1, 2);
-//         if(enemy1.hp <= 10) {
-//             // if(c == 1) {
-//             //     enemy1.defence(hero);
-//             // }else if(c == 2){
-//             //     enemy1.attack(hero);
-//             // }
-//         }else {
-//             enemy1.attack(hero);
-//         }
-//     } else if (turn == 2) {
-//         atkbut.removeEventListener('click', hero.attack(enemy1))
-//         // defbut.removeEventListener('click', hero.defence(enemy1))
-//         // techbut.removeEventListener('click', hero.openTechMenu)
-//     }
-// }
-// document.body.addEventListener('timeupdate', tick);
-// if (battle = true) {
-//     let timer = setInterval(tick, 1000);
-// }else if (battle = false) {
-//     clearInterval(timer)
-// }

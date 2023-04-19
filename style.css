@@ -343,11 +343,10 @@ body {
     
 }
 .reshCenter p {
+    text-align: center;
     font-size: 20px;
     color: black;
-    position: absolute;
-    top: 40%;
-    left: 15%;
+    margin-top: 160px;
 }
 .reshCenter:hover {
     animation: opc1 ease-in-out 100ms forwards;
