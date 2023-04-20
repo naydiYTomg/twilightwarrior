@@ -115,6 +115,33 @@
         opacity: 100%;
     }
 }
+@keyframes walk1 {
+    0% {
+        left: 650px;
+        top: 890px;
+        scale: 1;
+    }
+    25% {
+        left: 665px;
+        top: 885px;
+        scale: 1.05;
+    }
+    50% {
+        left: 680px;
+        top: 880px;
+        scale: 1;
+    }
+    75% {
+        left: 695px;
+        top: 875px;
+        scale: 1.05;
+    }
+    100% {
+        left: 710px;
+        top: 870px;
+        scale: 1;
+    }  
+}
 body {
     /* padding: 0; */
     /* margin: 0; */
@@ -396,4 +423,23 @@ body {
     font-size: 400px;
     top: -150px;
     left: 250px;
+}
+.map {
+    display: none;
+    position: absolute;
+    z-index: 1;
+    top: 0px;
+    left: 0px;
+}
+.playerPos {
+    display: none;
+    position: absolute;
+    z-index: 1;
+    top: 890px;
+    left: 650px;
+    background-color: yellow;
+    width: 20px;
+    height: 20px;
+    border-radius: 100px;
+    border: 5px black solid;
 }
