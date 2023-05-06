@@ -284,6 +284,7 @@ body {
     border-radius: 10px;
 }
 .enemyname{
+    display: none;
     position: absolute;
     color: white;
     font-size: 90px;
@@ -291,6 +292,7 @@ body {
     left: 10px;
 }
 .enemyhp{
+    display: none;
     color: white;
     position: absolute;
     font-size: 50px;
@@ -298,6 +300,7 @@ body {
     left: 10px;
 }
 .enemydef{
+    display: none;
     position: absolute;
     color: white;
     font-size: 50px;

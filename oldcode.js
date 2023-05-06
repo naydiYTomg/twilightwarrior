@@ -1,23 +1,3 @@
-
-// ЧТО НАДО СДЕЛАТЬ:
-// Чтобы противник атаковал,
-// Защиту
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 let atkbut = document.getElementById('atkb');
 let defbut = document.getElementById('defb');
 let resh1 = document.getElementById('r1')
@@ -27,7 +7,16 @@ let reshCenterP = document.getElementById('rcp')
 let resh1p = document.getElementById('r1p')
 let resh2p = document.getElementById('r2p')
 let z1 = document.getElementById('z1')
+let enname = document.getElementById('en')
+let enhp = document.getElementById('eh')
+let endef = document.getElementById('ed')
+let plhp = document.getElementById('ph')
+let pldef = document.getElementById('pd')
+let pldmg = document.getElementById('pdmg')
+let kc = document.getElementById('kc')
 let forest = document.getElementById('for');
+let turn = 2;
+let defenceState = false;
 let end = document.getElementById('end');
 let blscr = document.getElementById('bs');
 let ht = document.getElementById('ht');
@@ -37,10 +26,50 @@ let map1 = document.getElementById('map');
 let ppos = document.getElementById('ppos');
 let countOfEvil = 0;
 let countOfGood = 0;
-let attacked = 0;
-let fightnumber;
 
-document.addEventListener("DOMContentLoaded", blToN);
+
+// if(localStorage.getItem('saveData') == 1) {
+//     next1();
+//     // nextbut.removeEventListener('click', next1);
+//     nextbut.removeEventListener('click', next2);
+//     nextbut.removeEventListener('click', next3);
+//     nextbut.removeEventListener('click', next4);
+//     nextbut.removeEventListener('click', nextToBattle1);
+// }else if(localStorage.getItem('saveData') == 2) {
+//     next2();
+//     nextbut.removeEventListener('click', next1);
+//     // nextbut.removeEventListener('click', next2);
+//     nextbut.removeEventListener('click', next3);
+//     nextbut.removeEventListener('click', next4);
+//     nextbut.removeEventListener('click', nextToBattle1);
+// }else if(localStorage.getItem('saveData') == 3) {
+//     nextToBattle1();
+//     nextbut.removeEventListener('click', next1);
+//     nextbut.removeEventListener('click', next2);
+//     nextbut.removeEventListener('click', next3);
+//     nextbut.removeEventListener('click', next4);
+//     // nextbut.removeEventListener('click', nextToBattle1);
+// }else if(localStorage.getItem('saveData') == 4) {
+//     next3();
+//     nextbut.removeEventListener('click', next1);
+//     nextbut.removeEventListener('click', next2);
+//     // nextbut.removeEventListener('click', next3);
+//     nextbut.removeEventListener('click', next4);
+//     nextbut.removeEventListener('click', nextToBattle1);
+// }else if(localStorage.getItem('saveData') == 5) {
+//     next4();
+//     nextbut.removeEventListener('click', next1);
+//     nextbut.removeEventListener('click', next2);
+//     nextbut.removeEventListener('click', next3);
+//     // nextbut.removeEventListener('click', next4);
+//     nextbut.removeEventListener('click', nextToBattle1);
+// }else {
+    document.addEventListener("DOMContentLoaded", blToN);
+// }
+
+
+
+
 
 z1.style.display = 'none';
 function blToN() {
@@ -50,104 +79,122 @@ function blToN() {
         blscr.style.display = 'none';
     }, 3300)
 }
-
 function getRandomArbitrary(min, max) {
     return Math.round(Math.random() * (max - min) + min);
-  };
-var Hero = {
-    hp: 10,
-    dmg: 3,
-    def: 1,
-    mana: 15,
-    invsize: 10,
-    defenceState: false
-};
-var Enemy = {
-    name: "Болотный Зомби",
-    hp: 10,
-    dmg: 2,
-    def: 1,
-    defenceState: false
-};
-let enname = document.getElementById('en')
-let enhp = document.getElementById('eh')
-let endef = document.getElementById('ed')
-let plhp = document.getElementById('ph')
-let pldef = document.getElementById('pd')
-let pldmg = document.getElementById('pdmg')
-let plmana;
-let endmg;
-let kc = document.getElementById('kc');
-function update() {
-    atkbut.addEventListener('click', atk);
-    plhp.innerHTML = 'Здоровье - '+Hero.hp;
-    pldef.innerHTML = 'Защита - '+Hero.def;
-    pldmg.innerHTML = 'Урон - '+Hero.dmg;
-    enname.innerHTML = Enemy.name;
-    enhp.innerHTML = 'Здоровье - '+Enemy.hp;
-    endef.innerHTML = 'Защита - '+Enemy.def;
-    // endmg.innerHTML = 'Урон - '+Enemy.dmg;
-};
-function reset1() {
-    Enemy.hp = 10;
+  }
+class Enemy {
+    constructor(name, hp, damage, def) {
+        this.name = name;
+        this.hp = hp;
+        this.damage = damage;
+        this.def = def;
+    }
+    attack(player) {
+        if(defenceState == false) {
+            let b = getRandomArbitrary((this.damage - player.def), (this.damage + 1));
+            player.hp -= b;
+        }else if(defenceState == true) {
+            let b = getRandomArbitrary(0, 1);
+            player.hp -=b;
+            defenceState = false
+        }
+        if (player.hp <= 0) {
+            endgame();
+        }else {
+            atkbut.addEventListener('click', atk);
+            defbut.addEventListener('click', def)
+        }
+    }
 }
-function kill(target) {
+class Hero {
+    constructor(hp, damage, def, mana, invsize) {
+        this.hp = hp;
+        this.damage = damage;
+        this.def = def;
+        this.mana = mana;
+        this.invsize = invsize;
+    }
+    attack(enemy) {
+        let a = getRandomArbitrary((this.damage - enemy.def), (this.damage + 1));
+        enemy.hp -= a;
+        
+        if(enemy.hp <= -1) {
+            enhp.innerHTML = '';
+            endef.innerHTML = '';
+            kill();
+        }else {
+            enemy1.attack(hero);
+            changePlayerStats();
+        }
+    }
+    defence() {
+        defenceState = true;
+        enemy1.attack(hero);
+        changePlayerStats();
+    }
+}
+function changePlayerStats() {
+    plhp.innerHTML = 'Здоровье - '+hero.hp;
+    pldef.innerHTML = 'Защита - '+hero.def;
+    pldmg.innerHTML = 'Урон - '+hero.damage;
+}
+function changeEnStats() {
+    turn = 0;
+    enname.innerHTML = enemy1.name;
+    enhp.innerHTML = 'Здоровье - '+enemy1.hp;
+    endef.innerHTML = 'Защита - '+enemy1.def;
+    z1.style.display = 'block';
+}
+function atk() {
+    turn = 1;
+    atkbut.removeEventListener('click', atk);
+    hero.attack(enemy1);
+    if (enemy1.hp >= 0){
+        changeEnStats();
+    }
+}
+function def() {
+    turn = 1;
+    defbut.removeEventListener('click', def)
+    hero.defence();
+}
+function resetEnStats() {
+    atkbut.addEventListener('click', atk);
+    defbut.addEventListener('click', def)
+    enemy1.hp = 10;
+}
+function kill() {
     kc.style.display = 'block';
     enname.innerText = 'Повержен';
-    enhp.style.display = 'none';
-    endef.style.display = 'none';
-    target.defenceState = false;
+    enhp.innerHTML = ' ';
+    endef.innerHTML = ' ';
     setTimeout(function(){
         z1.style.display = 'none';
         kc.style.display = 'none';
-        enname.style.display = 'none';
-        if(fightnumber == 1) {
-            next3();
-        }
+        enname.innerHTML = ' ';
+        next3();
     }, 5000)
-};
-function attack(target, attacker) {
-    if(target.def > attacker.dmg) {
-        if(target.defenceState == true) {
-            target.hp -= 1
-            attacked = 1;
-        }else if(target.defenceState == false) {
-            target.hp -= 1
-            attacked = 1;
-        }
-    }else {
-        if(target.defenceState == true) {
-            target.hp -= getRandomArbitrary(0, 2);
-            target.defenceState = false;
-            attacked = 1;
-        }else if(target.defenceState == false) {
-            target.hp -= getRandomArbitrary((attacker.dmg - target.def), (attacker.dmg + 1))
-            attacked = 1;
-        }
-    }    
-    if (target.hp <= 0) {
-        kill(target);
-        attacked = 0;
-    }else {
-        update();
-    }
-};
-function atk() {
     atkbut.removeEventListener('click', atk);
-    attack(Enemy, Hero);
+    defbut.removeEventListener('click', def);
 }
-function defence(target) {
-    target.defenceState = true;
-};
-update();
-function startBattle() {
-    if(attacked == 0) {
-        atkbut.addEventListener('click', atk);
-    }else if(attacked == 1) {
-        attack(Hero, Enemy)
-        update();
-    }
+function changeDMG() {
+    hero.damage = 5;
+    changePlayerStats();
 }
+function endgame() {
+    end.style.display = 'inline';
+    atkbut.removeEventListener('click', atk);
+    defbut.removeEventListener('click', def);
+    resh1.removeEventListener('click', resetEnStats);
+    resh1.removeEventListener('click', changeEnStats);
+    stop();
+}
+
+let enemy1 = new Enemy('Болотный Зомби',10, 2, 1);
+let hero = new Hero(10, 3, 1, 15, 10);
+changePlayerStats();
+
+
 //storytelling
 
 //before the separation on the path of good and evil/до разделения на пути добра и зла
@@ -156,23 +203,20 @@ function next1() {
     ht.innerHTML = '- Ни черта ни помню, даже имени';
     nextbut.removeEventListener('click', next1)
     nextbut.addEventListener('click', next2)
+    localStorage.setItem('saveData', 1);
 }
 function next2() {
     ht.innerHTML = '- О, какой-то человек идёт! Погодите-ка, это же не человек!';
     nextbut.removeEventListener('click', next2);
     nextbut.addEventListener('click', nextToBattle1);
+    localStorage.setItem('saveData', 2);
 }
 function nextToBattle1() {
     nextbut.style.display = 'none';
     ht.style.display = 'none';
-    z1.style.display = 'block';
-    enname.style.display = 'inline';
-    enhp.style.display = 'inline';
-    endef.style.display = 'inline';
-    fightnumber = 1;
-    reset1()
-    update();
-    startBattle();
+    resetEnStats();
+    changeEnStats();
+    localStorage.setItem('saveData', 3);
 }
 function next3() {
     nextbut.style.display = 'block';
@@ -180,6 +224,7 @@ function next3() {
     ht.innerHTML = '- Ух, это было сложно. Так, я где-то в болотах. Надо выбираться';
     nextbut.addEventListener('click', next4)
     nextbut.removeEventListener('click', nextToBattle1);
+    localStorage.setItem('saveData', 4);
 }
 function next4() {
     ht.innerHTML = ' ';
@@ -245,8 +290,8 @@ function wGnext2() {
     wiz.style.display = 'none';
     enname.style.display = 'none';
     nextbut.style.left = '750px';
-    Hero.hp = 11;
-    update();
+    hero.hp = 11;
+    changePlayerStats();
     nextbut.removeEventListener('click', wGnext2);
     nextbut.addEventListener('click', wGnext3);
 }
@@ -350,28 +395,3 @@ function wEnext1() {
 }
 
 nextbut.addEventListener('click', next1)
-// DEBUG
-
-// function chStatsToZ2() {
-//     Enemy.name = 'Лесной Зомби';
-//     Enemy.hp = 15;
-//     Enemy.dmg = 3;
-// }
-
-// console.log(Enemy.name);
-// console.log(Enemy.hp);
-// Enemy.defenceState = true;
-// console.log(Enemy.defenceState);
-// setTimeout(attack(Enemy, Hero), 100);
-// console.log(Enemy.hp);
-// console.log(Enemy.defenceState);
-
-// chStatsToZ2();
-
-// console.log(Enemy.name);
-// console.log(Enemy.hp);
-// Enemy.defenceState = true;
-// console.log(Enemy.defenceState);
-// setTimeout(attack(Enemy, Hero), 100);
-// console.log(Enemy.hp);
-// console.log(Enemy.defenceState);
